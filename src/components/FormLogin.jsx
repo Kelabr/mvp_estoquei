@@ -11,18 +11,18 @@ export default function FormLogin(){
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="font-medium">Email</label>
-                <Input name="email" className="mt-1"/>
+                <Input name="email" className="mt-1" type="email"/>
             </div>
             <div className="mb-5">
                 <label htmlFor=""  className="font-medium">Senha</label>
-                <Input name="senha" className="mt-1"/>
+                <Input name="password" className="mt-1" type="password"/>
             </div>
             <div className="mb-7">
                 <Button variant="outline" className="w-full p-5 text-md">Entrar</Button>
             </div>
             <div className="flex justify-between">
                 <Link href="#" className="underline text-[12px]">Esqueci minha senha</Link>
-                <Link href="#" className="underline text-[12px]">Fazer cadastro</Link>
+                <Link href="./register" className="underline text-[12px]">Fazer cadastro</Link>
             </div>
         </form>
     )
