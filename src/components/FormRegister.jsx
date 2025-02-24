@@ -4,6 +4,7 @@
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { useState } from "react"
+import {useRouter} from 'next/navigation'
 
 export default function FormRegister(){
 
@@ -11,18 +12,50 @@ export default function FormRegister(){
     const [confirmPassword, setConfirmPassword] = useState("")
     const [notEqualPassword, setnotEqualPassword] = useState(false)
 
+    const router = useRouter()
 
-    function sendData(event){ //Aonde se faz a validação dos campos e o envio dos dados para o backend 
+
+    async function sendData(event){ //Aonde se faz a validação dos campos e o envio dos dados para o backend 
 
         event.preventDefault()
+
+        
+        const data = new FormData(event.target)
+        const owner = data.get('owner') 
+        const email = data.get('email')
+        const establishment = data.get('establishment')
+
+
 
         if(password !== confirmPassword){
             console.log("As senhas não são iguais")
             setnotEqualPassword(true)
+            return
         }else{
             console.log("As senhas são iguais")
             setnotEqualPassword(false)
+
+           
         }
+
+
+        try{
+            const response = await fetch('http://localhost:3333/api/register', {
+                method:'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({owner, email, establishment, password})
+            })
+
+            if(!response.ok){
+                console.log('Erro ao cadastrar usuário')
+            }
+        }catch(error){
+            console.log("Erro!!")
+        }
+        
+        router.push('./dashboard')
+
+
     }
 
     
@@ -35,7 +68,7 @@ export default function FormRegister(){
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="font-medium">Nome completo do proprietário</label>
-                <Input name="namepropri" className="mt-1"/>
+                <Input name="owner" className="mt-1"/>
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="font-medium">Email</label>
@@ -43,7 +76,7 @@ export default function FormRegister(){
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="font-medium">Nome do Estabelecimento</label>
-                <Input name="nameestabe" className="mt-1"/>
+                <Input name="establishment" className="mt-1"/>
             </div>
             {
                 notEqualPassword ? (
