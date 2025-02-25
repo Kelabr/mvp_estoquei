@@ -43,7 +43,8 @@ export default function FormRegister(){
             const response = await fetch('http://localhost:3333/api/register', {
                 method:'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({owner, email, establishment, password})
+                body: JSON.stringify({owner, email, establishment, password}),
+                credentials: 'include'
             })
 
             if(!response.ok){
