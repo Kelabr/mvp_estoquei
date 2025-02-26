@@ -1,13 +1,23 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 
 export default function FormLogin(){
     return(
         <form className="px-5">
-            <div className="mb-5">
-                <p className="text-2xl font-medium mb-1">Estoquei</p>
-                <p className="text-sm font-medium text-gray-400">Aonde você tem a visão do seu negócio</p>
+            <div className="mb-5 flex items-center">
+                <div className="relative h-28 w-28">
+                    <Image
+                    src='/logo/alinamesa.svg'
+                    layout="fill"
+                    alt='Logo Alinamesa'
+                    />
+                </div>
+                <div className="flex flex-col">
+                    <p className="text-2xl font-medium mb-1">Alinamesa</p>
+                    <p className="text-sm font-medium text-gray-400">Aonde você tem a visão do seu negócio</p>
+                </div>
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="font-medium">Email</label>

@@ -1,6 +1,6 @@
 'use client'
 
-
+import Image from "next/image"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { useState } from "react"
@@ -63,9 +63,18 @@ export default function FormRegister(){
 
     return(
         <form className="px-5" onSubmit={sendData}>
-            <div className="mb-5">
-                <p className="text-2xl font-medium mb-1">Estoquei</p>
-                <p className="text-sm font-medium text-gray-400">Registre-se no lugar aonde está a visão do seu negócio</p>
+            <div className="mb-5 flex items-center">
+                <div className="relative h-28 w-28">
+                    <Image
+                    src='/logo/alinamesa.svg'
+                    layout="fill"
+                    alt='Logo Alinamesa'
+                    />
+                </div>
+                <div className="flex flex-col">
+                    <p className="text-2xl font-medium mb-1">Alinamesa</p>
+                    <p className="text-sm font-medium text-gray-400">Registre-se no lugar aonde pode estar a visão do seu negócio</p>
+                </div>
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="font-medium">Nome completo do proprietário</label>
