@@ -38,12 +38,10 @@ export default function FormLogin(){
                 throw new Error('Erro ao fazer login')
             }
 
-            console.log('ok')
-
             router.push('/dashboard')
 
         }catch(error){
-            setError('Usuário ou Senha invalidos')
+            setError('*Usuário ou Senha invalidos')
         }
     }
 
@@ -64,6 +62,7 @@ export default function FormLogin(){
                 </div>
             </div>
             <div className="mb-3">
+                {<p className="text-red-500 font-medium text-sm mb-3">{error}</p>}
                 <label htmlFor="" className="font-medium">Email</label>
                 <Input name="email" className="mt-1" type="email"/>
             </div>
