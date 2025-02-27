@@ -1,11 +1,55 @@
+'use client'
+
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 
+
 export default function FormLogin(){
+
+    const router = useRouter()
+    const [error, setError] = useState('')
+
+    async function sendData(event){
+        
+        event.preventDefault()
+
+        const formData = new FormData(event.target)
+        const email = formData.get('email')
+        const password = formData.get('password')
+
+        setError('')
+
+        try{
+
+            const response = await fetch('http://localhost:3333/api/login', {
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({email, password}),
+                credentials: 'include'
+            })
+
+            if(!response.ok){
+                throw new Error('Erro ao fazer login')
+            }
+
+            console.log('ok')
+
+            router.push('/dashboard')
+
+        }catch(error){
+            setError('Usuário ou Senha invalidos')
+        }
+    }
+
+
     return(
-        <form className="px-5">
+        <form className="px-5" onSubmit={sendData}>
             <div className="mb-5 flex items-center">
                 <div className="relative h-28 w-28">
                     <Image
